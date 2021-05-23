@@ -1,0 +1,139 @@
+import java.util.Scanner;
+public class APCSProblem1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner reader = new Scanner(System.in);
+		String userInput = reader.nextLine();
+		String[] inputArr = userInput.split(",");
+		double[] numbers = new double[inputArr.length];
+		for(int i = 0; i < inputArr.length; i++) {
+			numbers[i] = Double.parseDouble(inputArr[i]);
+		}
+		double length = numbers[0];
+		double height = numbers[1];
+		double thickness = numbers[2];
+		double weigth = numbers[3];
+		int lengthPlusDistance = (int) (length + (height + height + thickness + thickness));
+		if(regularPostCard(length, height, thickness, weigth)) {
+			System.out.println(String.format("%.2f",0.20*((weigth/0.0625) +1)));
+		}
+		else if(largePostCard(length, height, thickness, weigth)) {
+			System.out.println(String.format("%.2f",0.30*((weigth/0.0625) +1)));
+		}
+		else if(envelope(length, height, thickness, weigth)) {
+			System.out.println(String.format("%.2f",0.47*((weigth/0.0625) +1)));
+		}
+		else if(largeEnvelope(length, height, thickness, weigth)) {
+			System.out.println(String.format("%.2f",0.56*((weigth/0.0625) +1)));
+		}
+		else if(mailPackage(length, height, thickness, weigth)) {
+			System.out.println(String.format("%.2f",1.50*((weigth/0.50) +1)));
+		}
+		else if(mailLargePackage(length, height, thickness, weigth)) {
+			System.out.println(String.format("%.2f",1.75*((weigth/0.50) +1)));
+		}
+		
+		
+	}
+	public static boolean regularPostCard(double length, double height, double thickness, double weigth) {
+		boolean bLength = false;
+		boolean bHeigth = false;
+		boolean bThickness = false;
+		if(length >= 3.5 && length <= 4.25) {
+			bLength = true;
+		}
+		if(height >= 3.5 && height <= 6) {
+			bHeigth = true;
+		}
+		if(thickness >= 0.007 && thickness <= 0.016) {
+			bThickness = true;
+		}
+		if(bLength == true && bHeigth == true && bThickness == true) {
+			return true;
+		}
+		return false;
+	}
+	public static boolean largePostCard(double length, double height, double thickness, double weigth) {
+		boolean bLength = false;
+		boolean bHeigth = false;
+		boolean bThickness = false;
+		if(length >= 4.25 && length <= 6) {
+			bLength = true;
+		}
+		if(height >= 6 && height <= 11.5) {
+			bHeigth = true;
+		}
+		if(thickness >= 0.007 && thickness <= 0.016) {
+			bThickness = true;
+		}
+		if(bLength == true && bHeigth == true && bThickness == true) {
+			return true;
+		}
+		return false;
+	}
+	public static boolean envelope(double length, double height, double thickness, double weigth) {
+		boolean bLength = false;
+		boolean bHeigth = false;
+		boolean bThickness = false;
+		if(length >= 3.5 && length <= 6.125) {
+			bLength = true;
+		}
+		if(height >= 5 && height <= 11.5) {
+			bHeigth = true;
+		}
+		if(thickness >= 0.016 && thickness <= 0.25) {
+			bThickness = true;
+		}
+		if(bLength == true && bHeigth == true && bThickness == true) {
+			return true;
+		}
+		return false;
+	}
+	public static boolean largeEnvelope(double length, double height, double thickness, double weigth) {
+		boolean bLength = false;
+		boolean bHeigth = false;
+		boolean bThickness = false;
+		if(length >= 6.125 && length <= 24) {
+			bLength = true;
+		}
+		if(height >= 11 && height <= 18) {
+			bHeigth = true;
+		}
+		if(thickness >= 0.25 && thickness <= 0.5) {
+			bThickness = true;
+		}
+		if(bLength == true && bHeigth == true && bThickness == true) {
+			return true;
+		}
+		return false;
+	}
+	public static boolean mailPackage(double length, double height, double thickness, double weigth) {
+		boolean bLength = false;
+		boolean bHeigth = false;
+		boolean bThickness = false;
+		int lengthPlusDistance = (int) (length + (height + height + thickness + thickness));
+		if(length > 6.125) {
+			bLength = true;
+		}
+		if(height > 11.5) {
+			bHeigth = true;
+		}
+		if(thickness > 0.25) {
+			bThickness = true;
+		}
+		if(bLength == true && bHeigth == true && bThickness == true && lengthPlusDistance <= 84) {
+			return true;
+		}
+		return false;
+	}
+	public static boolean mailLargePackage(double length, double height, double thickness, double weigth) {
+		int lengthPlusDistance = (int) (length + (height + height + thickness + thickness));
+		if(lengthPlusDistance >= 84 && lengthPlusDistance <= 130) {
+			return true;
+		}
+		return false;
+	}
+
+
+}
